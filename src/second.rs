@@ -40,6 +40,17 @@ impl <T> List<T> {
         })
     }
 
+    pub fn peek(&self) -> Option<&T> {
+        self.head.as_ref().map(| node | {
+            &node.elem
+        })
+    }
+    
+    pub fn peek_mut(&mut self) -> Option<&mut T> {
+        self.head.as_mut().map(| node | {
+            &mut node.elem
+        })
+    }
 }
 
 impl <T> Drop for List<T> {
@@ -82,5 +93,19 @@ mod test {
         assert_eq!(list.pop(), None);
     }
     
+    #[test]
+    fn peek() {
+        let mut list = List::new();
+        assert_eq!(list.peek(), None);
+        assert_eq!(list.peek_mut(), None);
+        
+        let elems = [1, 2, 3, 4, 5, 6, 7, 8];
+        for x in elems.iter() {
+            list.push(*x);
+        }
+
+        assert_eq!(list.peek(), Some(&8));
+        assert_eq!(list.peek_mut(), Some(&mut 8));
+    }
 
 }
