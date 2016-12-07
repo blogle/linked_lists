@@ -89,3 +89,35 @@ impl List {
         }
     }
 }
+
+// tests R good
+#[cfg(test)]
+mod test {
+    use super::List;
+
+    #[test]
+    fn push_pop(){
+        // Create an empty list
+        let mut list = List::new();
+
+        // Are we sure its empty?
+        assert_eq!(list.pop(), None);
+
+        // Ok lets make it not empty
+        let mut elems = [1, 2, 3, 4, 5, 6, 7, 8];
+        for x in elems.iter() {
+            list.push(*x);
+        }
+
+        // Make sure those elems made it in the list
+        elems.reverse();
+        for x in elems.iter(){
+            assert_eq!(list.pop(), Some(*x));
+        }
+
+        // All elems should be gone
+        // make sure nothing wonk is going on
+        assert_eq!(list.pop(), None);
+    }
+
+}
