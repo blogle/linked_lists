@@ -1,4 +1,4 @@
-/// struct List {
+/// enum List {
 ///     Nil,
 ///     Cons(i32, Box<List>)
 /// }
